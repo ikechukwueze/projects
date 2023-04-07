@@ -28,4 +28,19 @@ class Ticker(models.Model):
         return self.symbol
 
 
+class StockPrice(models.Model):
+    symbol = models.ForeignKey(Ticker, on_delete=models.CASCADE)
+    open = models.FloatField()
+    close = models.FloatField()
+    low = models.FloatField()
+    high = models.FloatField()
+    volume = models.FloatField()
+    adj_high = models.FloatField()
+    adj_low = models.FloatField()
+    adj_close = models.FloatField()
+    adj_open = models.FloatField()
+    adj_volume = models.FloatField()
+    date = models.DateTimeField()    
 
+    def __str__(self) -> str:
+        return self.symbol
