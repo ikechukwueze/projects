@@ -17,3 +17,15 @@ class StockExchange(models.Model):
 
     def __str__(self) -> str:
         return self.acronym
+
+
+class Ticker(models.Model):
+    name = models.CharField(max_length=100)
+    symbol = models.CharField(max_length=10)
+    exchange = models.ManyToManyField(StockExchange)
+
+    def __str__(self) -> str:
+        return self.symbol
+
+
+
