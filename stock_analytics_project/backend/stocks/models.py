@@ -32,16 +32,16 @@ class Ticker(models.Model):
 
 class StockPrice(models.Model):
     symbol = models.ForeignKey(Ticker, on_delete=models.CASCADE)
-    open = models.FloatField()
-    close = models.FloatField()
-    low = models.FloatField()
-    high = models.FloatField()
-    volume = models.FloatField()
-    adj_high = models.FloatField()
-    adj_low = models.FloatField()
-    adj_close = models.FloatField()
-    adj_open = models.FloatField()
-    adj_volume = models.FloatField()
+    open = models.FloatField(null=True)
+    close = models.FloatField(null=True)
+    low = models.FloatField(null=True)
+    high = models.FloatField(null=True)
+    volume = models.FloatField(null=True)
+    adj_high = models.FloatField(null=True)
+    adj_low = models.FloatField(null=True)
+    adj_close = models.FloatField(null=True)
+    adj_open = models.FloatField(null=True)
+    adj_volume = models.FloatField(null=True)
     date = models.DateField()    
 
     def __str__(self) -> str:
