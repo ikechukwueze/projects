@@ -42,7 +42,7 @@ class StockPrice(models.Model):
     adj_close = models.FloatField()
     adj_open = models.FloatField()
     adj_volume = models.FloatField()
-    date = models.DateTimeField()    
+    date = models.DateField()    
 
     def __str__(self) -> str:
         return self.symbol
