@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
@@ -20,6 +21,7 @@ class StockExchange(models.Model):
 
 
 class Ticker(models.Model):
+    owners = models.ManyToManyField(settings.AUTH_USER_MODEL)
     name = models.CharField(max_length=100)
     symbol = models.CharField(max_length=10)
     exchange = models.ManyToManyField(StockExchange)
