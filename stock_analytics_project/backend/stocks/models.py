@@ -20,7 +20,7 @@ class StockExchange(models.Model):
         return self.acronym
 
 
-class Ticker(models.Model):
+class Stock(models.Model):
     owners = models.ManyToManyField(settings.AUTH_USER_MODEL)
     name = models.CharField(max_length=100)
     symbol = models.CharField(max_length=10)
