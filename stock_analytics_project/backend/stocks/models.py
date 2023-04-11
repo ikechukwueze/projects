@@ -31,7 +31,8 @@ class Ticker(models.Model):
 
 
 class StockPrice(models.Model):
-    symbol = models.ForeignKey(Ticker, on_delete=models.CASCADE)
+    stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
+    exchange = models.ForeignKey(StockExchange, on_delete=models.CASCADE)
     open = models.FloatField(null=True)
     close = models.FloatField(null=True)
     low = models.FloatField(null=True)
