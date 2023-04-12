@@ -7,8 +7,8 @@ from django.conf import settings
 
 class StockExchange(models.Model):
     name = models.CharField(max_length=100)
-    acronym = models.CharField(max_length=30)
-    mic = models.CharField(max_length=15)
+    acronym = models.CharField(max_length=30, unique=True)
+    mic = models.CharField(max_length=15, unique=True, db_index=True)
     country = models.CharField(max_length=100)
     country_code = models.CharField(max_length=10)
     city = models.CharField(max_length=100)
