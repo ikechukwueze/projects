@@ -41,7 +41,8 @@ INSTALLED_APPS = [
 
     'stocks',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
