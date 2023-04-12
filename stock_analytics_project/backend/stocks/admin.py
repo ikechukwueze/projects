@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import StockExchange, StockPrice, Ticker
+from .models import StockExchange, StockPrice, Stock
 
 # Register your models here.
 
@@ -10,11 +10,11 @@ class StockExchangeAdmin(admin.ModelAdmin):
 
 
 class StockPriceAdmin(admin.ModelAdmin):
-    list_display = ["symbol", "open", "close", "high", "low", "volume"]
+    list_display = ["stock", "open", "close", "high", "low", "volume"]
     search_fields = ["symbol"]
 
 
-class TickerAdmin(admin.ModelAdmin):
+class StockAdmin(admin.ModelAdmin):
     list_display = ["name", "symbol"]
     search_fields = ["name", "symbol"]
     list_filter = ["exchange"]
@@ -24,4 +24,4 @@ class TickerAdmin(admin.ModelAdmin):
 
 admin.site.register(StockExchange, StockExchangeAdmin)
 admin.site.register(StockPrice, StockPriceAdmin)
-admin.site.register(Ticker, TickerAdmin)
+admin.site.register(Stock, StockAdmin)
