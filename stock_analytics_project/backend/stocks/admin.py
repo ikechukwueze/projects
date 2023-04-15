@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import StockExchange, StockPrice, Stock
+from .models import StockExchange, StockPrice, Stock, StockPortfolio
 
 # Register your models here.
 
@@ -20,8 +20,14 @@ class StockAdmin(admin.ModelAdmin):
     list_filter = ["exchange"]
 
 
+class StockPortfolioAdmin(admin.ModelAdmin):
+    list_display = ["owner", "stock", "exchange", "date_added"]
+    search_fields = ["owner__username"]
+
+
 
 
 admin.site.register(StockExchange, StockExchangeAdmin)
 admin.site.register(StockPrice, StockPriceAdmin)
 admin.site.register(Stock, StockAdmin)
+admin.site.register(StockPortfolio, StockPortfolioAdmin)
