@@ -10,7 +10,7 @@ class StockExchangeAdmin(admin.ModelAdmin):
 
 
 class StockPriceAdmin(admin.ModelAdmin):
-    list_display = ["stock", "open", "close", "high", "low", "volume"]
+    list_display = ["stock", "open", "close", "high", "low", "volume", "date"]
     search_fields = ["symbol"]
 
 
