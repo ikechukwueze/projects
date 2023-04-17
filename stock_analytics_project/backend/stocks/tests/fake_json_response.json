@@ -1,0 +1,61 @@
+{
+    "pagination": {
+        "limit": 1000,
+        "offset": 0,
+        "count": 3,
+        "total": 3
+    },
+    "data": [
+        {
+            "open": 183.08,
+            "high": 186.39,
+            "low": 179.74,
+            "close": 185.06,
+            "volume": 123857932.0,
+            "adj_high": 186.39,
+            "adj_low": 179.74,
+            "adj_close": 185.06,
+            "adj_open": 183.08,
+            "adj_volume": 123857932.0,
+            "split_factor": 1.0,
+            "dividend": 0.0,
+            "symbol": "TSLA",
+            "exchange": "XNAS",
+            "date": "2023-04-06T00:00:00+0000"
+        },
+        {
+            "open": 190.515,
+            "high": 190.68,
+            "low": 183.76,
+            "close": 185.52,
+            "volume": 133882493.0,
+            "adj_high": 190.68,
+            "adj_low": 183.76,
+            "adj_close": 185.52,
+            "adj_open": 190.515,
+            "adj_volume": 133882493.0,
+            "split_factor": 1.0,
+            "dividend": 0.0,
+            "symbol": "TSLA",
+            "exchange": "XNAS",
+            "date": "2023-04-05T00:00:00+0000"
+        },
+        {
+            "open": 197.32,
+            "high": 198.7446,
+            "low": 190.32,
+            "close": 192.58,
+            "volume": 126463845.0,
+            "adj_high": 198.7446,
+            "adj_low": 190.32,
+            "adj_close": 192.58,
+            "adj_open": 197.32,
+            "adj_volume": 126463845.0,
+            "split_factor": 1.0,
+            "dividend": 0.0,
+            "symbol": "TSLA",
+            "exchange": "XNAS",
+            "date": "2023-04-04T00:00:00+0000"
+        }
+    ]
+}
