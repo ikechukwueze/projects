@@ -4,35 +4,42 @@ from django.conf import settings
 # Create your models here.
 
 
-
 class StockExchange(models.Model):
     name = models.CharField(max_length=100)
     acronym = models.CharField(max_length=30, unique=True)
     mic = models.CharField(max_length=15, unique=True, db_index=True)
     country = models.CharField(max_length=100)
-    country_code = models.CharField(max_length=10)
     city = models.CharField(max_length=100)
     website = models.CharField(max_length=50)
-    timezone = models.CharField(max_length=50)
-    timezone_abbr = models.CharField(max_length=20)
 
     def __str__(self) -> str:
         return self.acronym
 
 
 class Stock(models.Model):
-    owners = models.ManyToManyField(settings.AUTH_USER_MODEL)
     name = models.CharField(max_length=100)
-    symbol = models.CharField(max_length=10)
-    exchange = models.ManyToManyField(StockExchange)
+    symbol = models.CharField(max_length=10, unique=True, db_index=True)
+    exchange = models.ManyToManyField(StockExchange, related_name="registered_stocks")
 
     def __str__(self) -> str:
         return self.symbol
 
 
+class StockPortfolio(models.Model):
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    stocks = models.ManyToManyField(Stock)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
 class StockPrice(models.Model):
-    stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
-    exchange = models.ForeignKey(StockExchange, on_delete=models.CASCADE)
+    stock = models.ForeignKey(
+        Stock, on_delete=models.CASCADE, related_name="stock_prices"
+    )
+    exchange = models.ForeignKey(
+        StockExchange, on_delete=models.CASCADE, related_name="stock_prices"
+    )
     open = models.FloatField(null=True)
     close = models.FloatField(null=True)
     low = models.FloatField(null=True)
@@ -43,7 +50,7 @@ class StockPrice(models.Model):
     adj_close = models.FloatField(null=True)
     adj_open = models.FloatField(null=True)
     adj_volume = models.FloatField(null=True)
-    date = models.DateField()    
+    date = models.DateField()
 
     def __str__(self) -> str:
         return self.symbol
