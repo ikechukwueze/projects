@@ -32,6 +32,11 @@ class StockPortfolio(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["owner", "name"], name='unique_portfolio_name')
+        ]
+
 
 class StockPrice(models.Model):
     stock = models.ForeignKey(
