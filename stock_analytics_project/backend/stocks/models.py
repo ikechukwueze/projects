@@ -22,11 +22,15 @@ class Stock(models.Model):
     exchange = models.ManyToManyField(StockExchange, related_name="registered_stocks")
 
     def __str__(self) -> str:
-        return self.symbol
+        return f"{self.symbol} - {self.exchange}"
 
 
 class StockPortfolio(models.Model):
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="stock_portfolios",
+    )
     name = models.CharField(max_length=50)
     stocks = models.ManyToManyField(Stock)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -34,16 +38,15 @@ class StockPortfolio(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=["owner", "name"], name='unique_portfolio_name')
+            models.UniqueConstraint(
+                fields=["owner", "name"], name="unique_portfolio_name"
+            )
         ]
 
 
 class StockPrice(models.Model):
     stock = models.ForeignKey(
         Stock, on_delete=models.CASCADE, related_name="stock_prices"
-    )
-    exchange = models.ForeignKey(
-        StockExchange, on_delete=models.CASCADE, related_name="stock_prices"
     )
     open = models.FloatField(null=True)
     close = models.FloatField(null=True)
@@ -58,4 +61,4 @@ class StockPrice(models.Model):
     date = models.DateField()
 
     def __str__(self) -> str:
-        return self.symbol
+        return f"{self.symbol} - {self.exchange}"
