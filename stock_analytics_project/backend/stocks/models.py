@@ -53,11 +53,6 @@ class StockPrice(models.Model):
     low = models.FloatField(null=True)
     high = models.FloatField(null=True)
     volume = models.FloatField(null=True)
-    adj_high = models.FloatField(null=True)
-    adj_low = models.FloatField(null=True)
-    adj_close = models.FloatField(null=True)
-    adj_open = models.FloatField(null=True)
-    adj_volume = models.FloatField(null=True)
     date = models.DateField()
 
     def __str__(self) -> str:
