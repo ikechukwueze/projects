@@ -21,10 +21,8 @@ class StockAdmin(admin.ModelAdmin):
 
 
 class StockPortfolioAdmin(admin.ModelAdmin):
-    list_display = ["owner", "stock", "exchange", "date_added"]
-    search_fields = ["owner__username"]
-
-
+    list_display = ["owner", "name", "created_at"]
+    search_fields = ["owner__username", "stocks__symbol"]
 
 
 admin.site.register(StockExchange, StockExchangeAdmin)
