@@ -28,7 +28,18 @@ class SimpleStockSerializer(serializers.ModelSerializer):
         fields = ["name", "symbol"]
 
 
+class StockExchangeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StockExchange
+        fields = ["name", "acronym", "mic", "country", "city", "website"]
 
+
+class StockPortfolioSerializer(serializers.ModelSerializer):
+    stocks = SimpleStockSerializer(many=True)
+
+    class Meta:
+        model = StockPortfolio
+        fields = ["name", "owner", "stocks", "created_at", "updated_at"]
 
 
 
