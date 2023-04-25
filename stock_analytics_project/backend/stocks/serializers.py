@@ -42,6 +42,19 @@ class StockPortfolioSerializer(serializers.ModelSerializer):
         fields = ["name", "owner", "stocks", "created_at", "updated_at"]
 
 
+class HistoricalDataSerializer(serializers.Serializer):
+    symbol = serializers.CharField(required=True)
+    mic = serializers.CharField(required=True)
 
+    def validate(self, attrs: dict) -> serializers.ValidationError | dict:
+        symbol = attrs["symbol"]
+        mic = attrs["mic"]
+
+        try:
+            Stock.objects.get(symbol=symbol, exchange__mic=mic)
+        except Stock.DoesNotExist:
+            raise serializers.ValidationError({"error": f"{symbol} is not registered on {mic}"})
+        else:
+            return attrs
 
 
