@@ -22,7 +22,7 @@ class Stock(models.Model):
     exchange = models.ManyToManyField(StockExchange, related_name="registered_stocks")
 
     def __str__(self) -> str:
-        return f"{self.symbol} - {self.exchange}"
+        return f"{self.symbol}"
 
 
 class StockPortfolio(models.Model):
@@ -48,6 +48,7 @@ class StockPrice(models.Model):
     stock = models.ForeignKey(
         Stock, on_delete=models.CASCADE, related_name="stock_prices"
     )
+    exchange = models.ForeignKey(StockExchange, on_delete=models.CASCADE)
     open = models.FloatField(null=True)
     close = models.FloatField(null=True)
     low = models.FloatField(null=True)
@@ -56,4 +57,4 @@ class StockPrice(models.Model):
     date = models.DateField()
 
     def __str__(self) -> str:
-        return f"{self.symbol} - {self.exchange}"
+        return f"{self.stock} - {self.exchange}"
