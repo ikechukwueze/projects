@@ -36,3 +36,28 @@ class ListPortfolio(generics.ListAPIView):
         user = self.request.user
         return StockPortfolio.objects.filter(owner=user)
 
+
+class HistoricalData(generics.ListAPIView):
+    queryset = StockPrice.objects.all()
+    serializer_class = StockPriceSerializer
+    permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = StockPriceFilter
+
+    def get_queryset(self):
+        symbol = self.request.query_params.get("symbol")
+        mic = self.request.query_params.get("mic")
+        data = {"symbol": symbol, "mic": mic}
+        
+        serializer = HistoricalDataSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        symbol = serializer.validated_data["symbol"]
+        mic = serializer.validated_data["mic"]
+        
+        queryset = StockPrice.objects.filter(
+            stock__symbol=symbol, exchange__mic=mic
+        ).select_related("stock", "exchange")
+        return queryset
+
+
+
