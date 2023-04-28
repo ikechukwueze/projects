@@ -23,4 +23,7 @@ class ListStocks(generics.ListAPIView):
     queryset = Stock.objects.all()
 
 
+class ListExchanges(generics.ListAPIView):
+    serializer_class = StockExchangeSerializer
+    queryset = StockExchange.objects.all()
 
