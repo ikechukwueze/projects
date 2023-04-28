@@ -27,3 +27,12 @@ class ListExchanges(generics.ListAPIView):
     serializer_class = StockExchangeSerializer
     queryset = StockExchange.objects.all()
 
+
+class ListPortfolio(generics.ListAPIView):
+    serializer_class = StockPortfolioSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return StockPortfolio.objects.filter(owner=user)
+
