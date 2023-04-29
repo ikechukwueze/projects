@@ -60,4 +60,13 @@ class HistoricalData(generics.ListAPIView):
         return queryset
 
 
+class AddStocktoPorfolioView(views.APIView):
+    permission_classes = [IsAuthenticated]
 
+    def post(self, request):
+        data = request.data
+        context = {"owner": self.request.user}
+        serializer = AddStocktoPortfolioSerializer(data=data, context=context)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(status=status.HTTP_201_CREATED)
